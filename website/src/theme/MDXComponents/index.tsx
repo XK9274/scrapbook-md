@@ -9,7 +9,7 @@ import MDXUl from '@theme/MDXComponents/Ul';
 import MDXLi from '@theme/MDXComponents/Li';
 import MDXImg from '@theme/MDXComponents/Img';
 import Admonition from '@theme/Admonition';
-import Mermaid from '@theme/Mermaid';
+import MermaidWithPopout from '@theme/MermaidWithPopout';
 
 import type {MDXComponentsObject} from '@theme/MDXComponents';
 
@@ -169,7 +169,7 @@ const MDXComponents: MDXComponentsObject = {
   h5: (props: ComponentProps<'h5'>) => <MDXHeading as="h5" {...props} />,
   h6: (props: ComponentProps<'h6'>) => <MDXHeading as="h6" {...props} />,
   admonition: Admonition,
-  mermaid: Mermaid,
+  mermaid: MermaidWithPopout,
   // Custom scrapbook components
   ScrapbookPrompt,
   ScrapbookIdea,
