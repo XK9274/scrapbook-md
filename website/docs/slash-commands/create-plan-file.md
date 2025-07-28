@@ -10,7 +10,7 @@
 3. **Create plan-$NEXT_VERSION.md** in the project root
 4. **Add heading**: "Plan $NEXT_VERSION"
 5. **Paste the outline** below the heading
-6. **Append**: "Created: <UTC timestamp>"
+6. **Append**: "Created: \<UTC timestamp\>"
 7. **Confirm the file is saved**
 
 ## Implementation Steps
