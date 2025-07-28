@@ -4,7 +4,7 @@
   <img src="assets/scrapbook-md.png" alt="scrapbook-md" />
 </div>
 
-A lightweight CLI tool and documentation website for quickly capturing and organizing ideas, prompts, todos, journal entries, and workflows in markdown format.
+A lightweight CLI tool and documentation website for quickly capturing and organizing ideas, prompts, todos, journal entries, and workflows in markdown format. Capture quick notes via a set of python CLI commands straight to a Docusaurus front end with mermaid support
 
 ## Quick Setup
 
