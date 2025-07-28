@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  scrapbook-web:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/docs:ro
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/ssl:ro
+      - ./website/build:/usr/share/nginx/html:ro
+    depends_on:
+      - scrapbook-web
+    restart: unless-stopped
+
+networks:
+  default:
+    name: scrapbook-network
