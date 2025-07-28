@@ -1,5 +1,5 @@
 #!/bin/bash
-# Scrapbook MD Wrapper Script
+# scrapbook-md Wrapper Script
 # This script handles the virtual environment activation automatically
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

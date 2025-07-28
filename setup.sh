@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Scrapbook MD Setup Script
+# scrapbook-md Setup Script
 # This script sets up the virtual environment and creates a wrapper script
 
 set -e
 
-echo "Setting up Scrapbook MD..."
+echo "Setting up scrapbook-md..."
 
 # Check if Python is available
 if ! command -v python3 &> /dev/null; then
@@ -28,7 +28,7 @@ pip install -e .
 echo "Creating scrap wrapper script..."
 cat > scrap << 'EOF'
 #!/bin/bash
-# Scrapbook MD Wrapper Script
+# scrapbook-md Wrapper Script
 # This script handles the virtual environment activation automatically
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Backup script for Scrapbook MD data
+# Backup script for scrapbook-md data
 
 set -e
 

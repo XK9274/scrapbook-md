@@ -1,9 +1,9 @@
 #!/bin/bash
-# Setup script for Scrapbook MD project
+# Setup script for scrapbook-md project
 
 set -e
 
-echo "🚀 Setting up Scrapbook MD..."
+echo "🚀 Setting up scrapbook-md..."
 
 # Create virtual environment for Python CLI
 echo "📦 Setting up Python environment..."

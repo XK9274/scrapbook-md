@@ -28,8 +28,8 @@ Setup is simple with our automated script:
 
 ```bash
 # Clone and setup
-git clone https://github.com/XK9274/scrapbook_md.git
-cd scrapbook_md
+git clone https://github.com/XK9274/scrapbook-md.git
+cd scrapbook-md
 ./setup.sh
 ```
 
@@ -97,12 +97,12 @@ This documentation site provides:
 
 ## Browse Content
 
-- **[Ideas](./ideas)** - Creative thoughts and insights
-- **[Prompts](./prompts)** - Templates and inspiration
-- **[Todos](./todos)** - Tasks and action items
-- **[Journal](./journal)** - Daily thoughts and development notes
-- **[Workflows](./workflows)** - Automated processes and workflows
-- **[Diagrams](./diagrams)** - Visual representations and charts
+- **[Ideas](./category/ideas)** - Creative thoughts and insights
+- **[Prompts](./category/prompts)** - Templates and inspiration
+- **[Todos](./category/todos)** - Tasks and action items
+- **[Journal](./category/journal)** - Daily thoughts and development notes
+- **[Workflows](./category/workflows)** - Automated processes and workflows
+- **[Diagrams](./category/diagrams)** - Visual representations and charts
 
 ## Search
 

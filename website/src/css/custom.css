@@ -123,21 +123,12 @@ html[data-theme='dark'] {
   display: none !important;
 }
 
-/* Hide Theme Toggle Elements */
+/* Hide Theme Toggle Elements - Less Aggressive */
 .navbar__item button[title*="theme"],
 .navbar__item button[title*="mode"],
 .navbar__item button[aria-label*="theme"],
-.navbar__item button[aria-label*="mode"],
-.navbar__item .colorModeToggle,
-.colorModeToggle_DEke,
-.toggleButton_gllP,
-button.clean-btn.toggleButton_gllP,
-[class*="colorModeToggle"],
-[class*="toggleButton"] {
+.navbar__item button[aria-label*="mode"] {
   display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
 }
 
 /* Hero Section - Centered Layout */

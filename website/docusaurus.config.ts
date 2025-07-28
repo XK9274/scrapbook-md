@@ -39,14 +39,15 @@ function buildNavbarItems() {
     { path: 'journal', label: 'Journal' },
     { path: 'workflows', label: 'Workflows' },
     { path: 'diagrams', label: 'Diagrams' },
-    { path: 'prompts', label: 'Prompts' },
+    { path: 'prompts', label: 'LLM Prompts', categorySlug: 'llm-prompts' },
   ];
 
   // Add categories that have content
   categories.forEach(category => {
     if (hasContent(category.path)) {
+      const slug = category.categorySlug || category.path;
       items.push({
-        to: `/docs/category/${category.path}`,
+        to: `/docs/category/${slug}`,
         position: 'left' as const,
         label: category.label,
       });
@@ -68,7 +69,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://localhost',
   // Set the /<baseUrl>/ pathname under which your site is served
   baseUrl: '/',
 
@@ -76,7 +77,7 @@ const config: Config = {
   organizationName: 'your-org',
   projectName: 'scrapbook-md',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -136,13 +137,6 @@ const config: Config = {
       },
     },
   } satisfies Preset.ThemeConfig,
-
-  scripts: [
-    {
-      src: '/js/force-dark-theme.js',
-      async: false,
-    },
-  ],
 
   plugins: [],
 };

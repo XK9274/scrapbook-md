@@ -24,7 +24,7 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--outline button--secondary button--lg"
-            href="https://github.com/XK9274/scrapbook_md">
+            href="https://github.com/XK9274/scrapbook-md">
             <svg
               width="16"
               height="16"
@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`scrapbook_md`}
+      title={`scrapbook-md`}
       description="Your personal knowledge wiki for ideas, prompts, and todos">
       <HomepageHeader />
     </Layout>

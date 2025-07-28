@@ -26,7 +26,7 @@ function Footer(): ReactNode {
             opacity: 0.7,
             marginBottom: '0.5rem'
           }}>
-            ✨ Powered by Scrapbook MD ✨
+            ✨ Powered by scrapbook-md ✨
           </div>
           {copyright && <FooterCopyright copyright={copyright} />}
         </div>

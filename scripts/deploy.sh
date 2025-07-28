@@ -1,5 +1,5 @@
 #!/bin/bash
-# Deployment script for Scrapbook MD
+# Deployment script for scrapbook-md
 
 set -e
 
@@ -11,7 +11,7 @@ if [ "$ENVIRONMENT" = "production" ]; then
     COMPOSE_FILE="docker-compose.prod.yml"
 fi
 
-echo "🚀 Deploying Scrapbook MD ($ENVIRONMENT)..."
+echo "🚀 Deploying scrapbook-md ($ENVIRONMENT)..."
 
 # Check if Docker is available
 if ! command -v docker &> /dev/null; then
