@@ -29,8 +29,8 @@ dependencies = [
 scrap = "cli.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/user/scrapbook-md"
-Repository = "https://github.com/user/scrapbook-md"
+Homepage = "https://github.com/XK9274/scrapbook-md"
+Repository = "https://github.com/XK9274/scrapbook-md"
 
 [tool.setuptools.packages.find]
 where = ["."]
