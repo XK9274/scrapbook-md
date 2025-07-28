@@ -1,66 +1,439 @@
 /**
  * Scrapbook Custom CSS
- * Scrapbook-style theming for content types
+ * Optimized theming for content types with dark theme
  */
 
+/* CSS Custom Properties - Global Variables */
 :root {
   /* Content Type Colors */
-  --ideas-primary: #4f46e5;     /* Indigo for Ideas */
-  --prompts-primary: #059669;   /* Emerald for Prompts */
-  --todos-primary: #dc2626;     /* Red for Todos */
-  --tags-primary: #7c3aed;      /* Purple for Tags */
+  --ideas-primary: #ff6b35;
+  --prompts-primary: #059669;
+  --todos-primary: #dc2626;
+  --tags-primary: #ff6b35;
   
-  /* Neutral Colors */
-  --neutral-text: #6b7280;      /* Content text */
-  --background: #fafafa;        /* Light background */
-  --surface: #ffffff;           /* Card backgrounds */
-  --border: #e5e7eb;           /* Subtle borders */
+  /* Theme Colors - Dark Mode Forced */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-dark: #e55a2b;
+  --ifm-color-primary-darker: #d9512b;
+  --ifm-color-primary-darkest: #b5432a;
+  --ifm-color-primary-light: #ff7b47;
+  --ifm-color-primary-lighter: #ff8556;
+  --ifm-color-primary-lightest: #ff9e79;
   
-  /* Docusaurus overrides */
-  --ifm-color-primary: #4f46e5;
-  --ifm-color-primary-dark: #4338ca;
-  --ifm-color-primary-darker: #3730a3;
-  --ifm-color-primary-darkest: #312e81;
-  --ifm-color-primary-light: #6366f1;
-  --ifm-color-primary-lighter: #818cf8;
-  --ifm-color-primary-lightest: #a5b4fc;
+  /* Background & Surface Colors */
+  --ifm-background-color: #171717;
+  --ifm-background-surface-color: #171717;
+  --background: #171717;
+  --surface: #171717;
+  
+  /* Text Colors */
+  --ifm-color-content: #d1d5db;
+  --ifm-color-content-secondary: #9ca3af;
+  --neutral-text: #d1d5db;
+  
+  /* Border & Emphasis Colors */
+  --border: #002259;
+  --ifm-color-emphasis-100: #1e1e20;
+  --ifm-color-emphasis-200: #1f252f;
+  --ifm-color-emphasis-300: #374151;
+  --ifm-color-emphasis-400: #4b5563;
+  --ifm-color-emphasis-500: #6b7280;
+  
+  /* Code & Sizing */
   --ifm-code-font-size: 76%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  
-  /* Global 20% scale reduction */
-  --ifm-font-size-base: 14.4px; /* Default 18px * 0.8 */
-  --ifm-line-height-base: 1.4; /* Default 1.75 * 0.8 */
-  --ifm-leading: 1.2rem; /* Default 1.5rem * 0.8 */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-font-size-base: 14.4px;
+  --ifm-line-height-base: 1.4;
+  --ifm-leading: 1.2rem;
+
+  /* Code Block Colors */
+  --ifm-code-background: #2b2b2b;
+  --ifm-pre-background: #2b2b2b;
+
+  .text--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #d3d3d3;
 }
 
-/* Dark theme */
-[data-theme='dark'] {
-  --background: #1f2937;
-  --surface: #111827;
-  --border: #374151;
-  --neutral-text: #9ca3af;
+.menu__link, .menu__caret {
+    align-items: center;
+    border-radius: 0.25rem;
+    display: flex;
+    color: #d3d3d3;
+    transition: background var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+}
+
+/* Force dark theme across all theme states */
+html,
+html[data-theme='light'],
+html[data-theme='dark'] {
+  --ifm-color-primary: #ff6b35;
+  --ifm-background-color: #171717;
+  --ifm-background-surface-color: #171717;
+  --ifm-color-content: #d1d5db;
+  --ifm-color-content-secondary: #9ca3af;
+  --background: #171717;
+  --surface: #171717;
+  --border: #002259;
+  --neutral-text: #d1d5db;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-emphasis-100: #1e1e20;
+  --ifm-color-emphasis-200: #1f252f;
+  --ifm-color-emphasis-300: #374151;
+  --ifm-color-emphasis-400: #4b5563;
+  --ifm-color-emphasis-500: #6b7280;
+}
+
+/* Navigation Bar - Centered Layout */
+.navbar {
+  justify-content: center !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.navbar__inner {
+  justify-content: center !important;
+  max-width: none !important;
+  width: 100% !important;
+  background: transparent !important;
+}
+
+.navbar__items,
+.navbar__items--left,
+.navbar__items--right {
+  flex: none !important;
+  justify-content: center !important;
+  background: transparent !important;
+}
+
+.navbar__item,
+.navbar__link {
+  display: flex !important;
+  align-items: center !important;
+  background: transparent !important;
+}
+
+.navbar__brand,
+.navbar__toggle {
+  display: none !important;
+}
+
+/* Hide Theme Toggle Elements */
+.navbar__item button[title*="theme"],
+.navbar__item button[title*="mode"],
+.navbar__item button[aria-label*="theme"],
+.navbar__item button[aria-label*="mode"],
+.navbar__item .colorModeToggle,
+.colorModeToggle_DEke,
+.toggleButton_gllP,
+button.clean-btn.toggleButton_gllP,
+[class*="colorModeToggle"],
+[class*="toggleButton"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hero Section - Centered Layout */
+.hero,
+.hero--primary,
+.heroBanner_qdFl {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1 !important;
+  background: transparent !important;
+}
+
+.hero__subtitle {
+  display: none !important;
+}
+
+/* ASCII Art Title Replacement */
+.hero__title {
+  font-family: 'Courier New', monospace !important;
+  font-size: 1.2rem !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
+  white-space: pre !important;
+  text-align: center !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-indent: -9999px !important;
+  color: transparent !important;
+  text-shadow: 
+    1px 1px 0px currentColor, 
+    2px 2px 0px currentColor,
+    3px 3px 0px currentColor,
+    4px 4px 0px rgba(0, 0, 0, 0.6),
+    5px 5px 0px rgba(0, 0, 0, 0.4),
+    6px 6px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.hero__title::before {
+  content: "                                |                    |                        | \A   __|   __|   __|  _\` |  __ \\   __ \\    _ \\    _ \\   |  /      __ \`__ \\    _\` | \A \\__ \\  (     |    (   |  |   |  |   |  (   |  (   |    <       |   |   |  (   | \A ____/ \\___| _|   \\__,_|  .__/  _.__/  \\___/  \\___/  _|\\_\\     _|  _|  _| \\__,_| \A                         _|                                                     ";
+  display: block !important;
+  text-indent: 0 !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  position: relative !important;
+  z-index: 2 !important;
+  text-shadow: inherit !important;
+  background: linear-gradient(
+    to bottom,
+    #ffff00 0%, #ffff00 20%,    /* Yellow - top line */
+    #ffa500 20%, #ffa500 40%,   /* Orange - second line */
+    #ff8c00 40%, #ff8c00 60%,   /* Dark orange - third line */
+    #ff4500 60%, #ff4500 80%,   /* Red orange - fourth line */
+    #ff0000 80%, #ff0000 100%   /* Red - bottom line */
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.hero__title span,
+.hero__title > *:not(::before) {
+  display: none !important;
+  visibility: hidden !important;
+  font-size: 0 !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Hero Buttons */
+.hero .buttons {
+  margin-top: 2rem !important;
+  display: flex !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.hero .button {
+  position: relative !important;
+  z-index: 3 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.hero .button:hover {
+  text-decoration: none !important;
+  transform: translateY(-2px) !important;
+  transition: transform 0.2s ease !important;
+}
+
+.hero .button--outline {
+  background: #323234 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ff6b35 !important;
+  border-left: 4px solid #ff6b35 !important;
+}
+
+.hero .button--outline:hover {
+  background: #3a3a3c !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #e55a2b !important;
+  border-left: 4px solid #e55a2b !important;
+}
+
+.hero .button--outline svg {
+  fill: #ff6b35 !important;
+  color: #ff6b35 !important;
+}
+
+.hero .button--outline:hover svg {
+  fill: #e55a2b !important;
+  color: #e55a2b !important;
+}
+
+/* Style navbar icons - Home and Dark Mode Toggle */
+.navbar__item svg {
+  fill: #ff6b35 !important;
+  color: #ff6b35 !important;
+}
+
+.navbar__item svg path {
+  fill: #ff6b35 !important;
+}
+
+/* Navbar Link Styling */
+.navbar__link,
+.navbar__link--active {
+  color: #ff6b35 !important;
+}
+
+.navbar__link:hover,
+.navbar__link--active:hover {
+  color: #e55a2b !important;
+}
+
+/* Dark mode toggle specific styling - target all possible selectors */
+.navbar__item button svg,
+.navbar__item [data-theme] svg,
+.navbar__item .clean-btn svg,
+.navbar__item .navbar__link svg,
+.navbar__item [role="button"] svg,
+.colorModeToggle_DEke svg,
+button[title*="theme"] svg,
+button[title*="mode"] svg,
+[data-theme='dark'] .navbar__item svg,
+[data-theme='light'] .navbar__item svg,
+.navbar button svg,
+.navbar .react-toggle-track svg,
+.navbar .toggle svg,
+html[data-theme='dark'] .navbar button svg,
+html[data-theme='light'] .navbar button svg {
+  fill: #ff6b35 !important;
+  color: #ff6b35 !important;
+}
+
+/* Home Icon Specific Styling */
+.navbar__link[aria-label="Home"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  padding: 0.75rem !important;
+}
+
+.navbar__link[aria-label="Home"] svg {
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle !important;
+}
+
+/* Layout Adjustments for Positioned Hero */
+body,
+.main-wrapper {
+  position: relative !important;
+  min-height: 100vh !important;
 }
 
 /* Content Type Styling */
 .content-type-idea {
-  border-left: 4px solid var(--ideas-primary);
-  background: rgba(79, 70, 229, 0.05);
+  border-left: 4px solid #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
+  color: #ff6b35;
 }
 
 .content-type-prompt {
-  border-left: 4px solid var(--prompts-primary);
-  background: rgba(5, 150, 105, 0.05);
+  border-left: 4px solid #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
+  color: #ff6b35;
 }
 
 .content-type-todo {
-  border-left: 4px solid var(--todos-primary);
-  background: rgba(220, 38, 38, 0.05);
+  border-left: 4px solid #ff6b35;
+  background: rgba(255, 107, 53, 0.05);
+  color: #ff6b35;
 }
 
 .content-type-tag {
   border-left: 4px solid var(--tags-primary);
-  background: rgba(124, 58, 237, 0.05);
+  background: rgba(255, 107, 53, 0.05);
+  color: #ff6b35;
+}
+
+/* DocCard List Item Styling - Universal Override */
+[class*="docCardListItem"] {
+  border-left: 4px solid #ff6b35 !important;
+}
+
+[class*="docCardListItem"]:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2) !important;
+}
+
+/* Code Block Styling */
+pre,
+code,
+.prism-code,
+[class*="codeBlock"],
+[class*="codeBlockLines"] {
+  background: #2b2b2b !important;
+  background-color: #2b2b2b !important;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: #2b2b2b !important;
+}
+
+/* Code Text Styling */
+code,
+pre code,
+.prism-code,
+.token.plain,
+span.token.plain,
+[class*="codeBlock"] code,
+[class*="codeBlockLines"] span {
+  color: #ff6b35 !important;
+}
+
+/* Syntax highlighting tokens */
+.token.keyword,
+.token.function,
+.token.class-name,
+.token.string,
+.token.number,
+.token.boolean,
+.token.comment,
+.token.operator,
+.token.punctuation {
+  color: #ff6b35 !important;
+}
+
+
+/* Universal SVG Icon Styling */
+svg {
+  fill: #ff6b35 !important;
+  color: #ff6b35 !important;
+}
+
+svg path,
+svg g,
+svg circle,
+svg rect,
+svg polygon {
+  fill: #ff6b35 !important;
+  stroke: #ff6b35 !important;
+}
+
+/* Sidebar and Menu Universal Styling */
+.theme-doc-sidebar-container svg,
+.menu svg,
+.menu__list svg,
+.theme-doc-toc-desktop svg,
+.table-of-contents svg,
+aside svg {
+  fill: #ff6b35 !important;
+  color: #ff6b35 !important;
+}
+
+/* Menu Caret Icon Override */
+:root {
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="%23ff6b35" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>') !important;
+  --ifm-menu-link-sublist-icon-filter: none !important;
+}
+
+.menu__caret:before {
+  filter: none !important;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 2rem 2rem !important;
+}
+
+.menu__caret {
+  --ifm-menu-link-sublist-icon-filter: none !important;
 }
 
 /* Content Cards */
@@ -86,7 +459,7 @@
 
 .tag-item {
   background: var(--ifm-color-primary);
-  color: white;
+  color: #f5f5f5;
   padding: 0.2rem 0.6rem;
   border-radius: 12.8px;
   font-size: 0.64rem;
@@ -96,7 +469,7 @@
 
 .tag-item:hover {
   background: var(--ifm-color-primary-dark);
-  color: white;
+  color: #f5f5f5;
   text-decoration: none;
 }
 
@@ -209,6 +582,46 @@
     height: 6.4px;
     left: -1.6px;
   }
+}
+
+/* Compact Footer Styling */
+.footer {
+  padding: 0.5rem 0 !important;
+  margin: 0 !important;
+  font-size: 0.7rem !important;
+  min-height: auto !important;
+}
+
+.footer__inner,
+.footer__container,
+.footer__links {
+  margin: 0 !important;
+  padding: 0.3rem 0 !important;
+}
+
+.footer__container {
+  padding: 0.2rem 1rem !important;
+}
+
+.footer__item {
+  margin: 0.1rem 0.5rem !important;
+  padding: 0 !important;
+}
+
+.footer__link-item {
+  padding: 0.1rem 0.3rem !important;
+  font-size: 0.7rem !important;
+}
+
+.footer__title {
+  font-size: 0.8rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.footer__copyright {
+  font-size: 0.65rem !important;
+  margin: 0.2rem 0 !important;
+  padding: 0.2rem 0 !important;
 }
 
 /* Print Styles */

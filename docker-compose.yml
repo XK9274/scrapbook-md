@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   scrapbook-dev:
     build:
@@ -9,13 +7,12 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./data:/app/docs:ro
       - ./website:/app:cached
       - /app/node_modules
     environment:
       - NODE_ENV=development
       - FAST_REFRESH=true
-    command: npm start
+    command: npm start -- --host 0.0.0.0 --port 3000
     restart: unless-stopped
 
 networks:

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Scrapbook MD Wrapper Script
+# This script handles the virtual environment activation automatically
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+if [ ! -d "venv" ]; then
+    echo "❌ Virtual environment not found. Please run setup.sh first."
+    exit 1
+fi
+
+source venv/bin/activate
+exec python -m cli.cli "$@"

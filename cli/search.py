@@ -72,6 +72,7 @@ class SearchEngine:
             'prompts': 0,
             'todos': 0,
             'journals': 0,
+            'workflows': 0,
             'active_todos': 0,
             'completed_todos': 0
         }

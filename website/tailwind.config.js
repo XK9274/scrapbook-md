@@ -14,7 +14,7 @@ module.exports = {
           'ideas': '#4f46e5',      // Indigo for Ideas
           'prompts': '#059669',    // Emerald for Prompts  
           'todos': '#dc2626',      // Red for Todos
-          'tags': '#7c3aed',       // Purple for Tags
+          'tags': '#ff6b35',       // Orange for Tags
           'neutral': '#6b7280',    // Content text
           'background': '#fafafa', // Light background
           'surface': '#ffffff',    // Card backgrounds

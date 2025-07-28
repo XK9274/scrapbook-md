@@ -89,9 +89,23 @@ def add_journal(ctx, title, content, context, tags, priority):
     _add_entry(ctx, EntryType.JOURNAL, title, content, context, tags, priority)
 
 
+@main.command('workflow')
+@click.argument('title')
+@click.argument('content')
+@click.option('--context', '-c', default='', help='Additional context')
+@click.option('--tags', '-t', default='', help='Comma-separated tags')
+@click.option('--category', default='general', help='Workflow category (development, automation, deployment, etc.)')
+@click.option('--priority', '-p', type=click.Choice(['low', 'medium', 'high', 'urgent']), 
+              default='medium', help='Priority level')
+@click.pass_context
+def add_workflow(ctx, title, content, context, tags, category, priority):
+    """Add a new workflow or process documentation."""
+    _add_entry(ctx, EntryType.WORKFLOW, title, content, context, tags, category, priority=priority)
+
+
 @main.command('search')
 @click.argument('query')
-@click.option('--type', '-t', type=click.Choice(['idea', 'prompt', 'todo', 'journal']), 
+@click.option('--type', '-t', type=click.Choice(['idea', 'prompt', 'todo', 'journal', 'workflow']), 
               help='Filter by entry type')
 @click.option('--tags', help='Filter by tags (comma-separated)')
 @click.option('--limit', '-l', type=int, default=10, help='Maximum results')
@@ -115,7 +129,7 @@ def search_entries(ctx, query, type, tags, limit):
 
 
 @main.command('list')
-@click.option('--type', '-t', type=click.Choice(['idea', 'prompt', 'todo', 'journal']), 
+@click.option('--type', '-t', type=click.Choice(['idea', 'prompt', 'todo', 'journal', 'workflow']), 
               help='Filter by entry type')
 @click.option('--recent', '-r', type=int, help='Show entries from last N days')
 @click.option('--limit', '-l', type=int, default=10, help='Maximum results')
@@ -153,12 +167,13 @@ def show_stats(ctx):
     stats = search_engine.get_statistics()
     tag_stats = search_engine.get_tag_statistics()
     
-    click.echo("📊 Scrapbook Statistics\n")
+    click.echo("Scrapbook Statistics\n")
     click.echo(f"Total entries: {stats['total_entries']}")
     click.echo(f"Ideas: {stats['ideas']}")
     click.echo(f"Prompts: {stats['prompts']}")
     click.echo(f"Todos: {stats['todos']} ({stats['active_todos']} active, {stats['completed_todos']} completed)")
     click.echo(f"Journal entries: {stats['journals']}")
+    click.echo(f"Workflows: {stats.get('workflows', 0)}")
     
     if tag_stats:
         click.echo(f"\nTop tags:")
@@ -211,13 +226,13 @@ def _add_entry(ctx, entry_type: EntryType, title: str, content: str,
     # Save entry
     entry_id = storage.save_entry(entry)
     
-    click.echo(f"✅ {entry_type.value.title()} saved with ID: {entry_id}")
+    click.echo(f"{entry_type.value.title()} saved with ID: {entry_id}")
 
 
 def _display_entry_summary(entry: dict):
     """Display a summary of an entry."""
-    type_emoji = {'idea': '💡', 'prompt': '📝', 'todo': '✅', 'journal': '📔'}
-    emoji = type_emoji.get(entry['type'], '📄')
+    type_emoji = {'idea': '', 'prompt': '', 'todo': '', 'journal': '', 'workflow': ''}
+    emoji = type_emoji.get(entry['type'], '')
     
     click.echo(f"{emoji} {entry['title']} ({entry['id']})")
     click.echo(f"   Type: {entry['type']} | Created: {entry['created_date'][:10]}")
@@ -228,7 +243,7 @@ def _display_entry_summary(entry: dict):
 
 def show_config(config: Config):
     """Display current configuration."""
-    click.echo("🔧 Scrapbook Configuration\n")
+    click.echo("Scrapbook Configuration\n")
     for key, value in config.config.items():
         click.echo(f"{key}: {value}")
 

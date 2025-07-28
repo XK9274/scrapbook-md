@@ -14,6 +14,7 @@ class EntryType(Enum):
     PROMPT = "prompt"
     TODO = "todo"
     JOURNAL = "journal"
+    WORKFLOW = "workflow"
 
 
 class Status(Enum):
@@ -54,7 +55,7 @@ class ScrapEntry:
             'tags': self.tags,
             'context': self.context,
             'status': self.status.value,
-            'priority': self.priority.value,
+            'priority': self.priority.value if self.priority else None,
             'category': self.category,
             'id': self.id
         }

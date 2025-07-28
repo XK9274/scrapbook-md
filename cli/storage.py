@@ -37,6 +37,7 @@ class StorageManager:
         (self.data_dir / 'prompts').mkdir(parents=True, exist_ok=True)
         (self.data_dir / 'todos').mkdir(parents=True, exist_ok=True)
         (self.data_dir / 'journal').mkdir(parents=True, exist_ok=True)
+        (self.data_dir / 'workflows').mkdir(parents=True, exist_ok=True)
         (self.data_dir / 'tags').mkdir(parents=True, exist_ok=True)
         
         # Hidden scrap directory
@@ -52,7 +53,8 @@ class StorageManager:
             'prompts': {'label': 'LLM Prompts', 'position': 2},
             'todos': {'label': 'Todos', 'position': 3},
             'journal': {'label': 'Journal', 'position': 4},
-            'tags': {'label': 'Tags', 'position': 5}
+            'workflows': {'label': 'Workflows', 'position': 5},
+            'tags': {'label': 'Tags', 'position': 6}
         }
         
         for dir_name, config in categories.items():
@@ -63,7 +65,7 @@ class StorageManager:
     
     def _load_counters(self) -> None:
         """Load ID counters from file."""
-        self.counters = {'idea': 0, 'prompt': 0, 'todo': 0, 'journal': 0}
+        self.counters = {'idea': 0, 'prompt': 0, 'todo': 0, 'journal': 0, 'workflow': 0}
         
         if self.counters_file.exists():
             try:
@@ -110,6 +112,12 @@ class StorageManager:
         elif entry.entry_type == EntryType.JOURNAL:
             # Simple journal directory
             dir_path = self.data_dir / 'journal'
+            dir_path.mkdir(parents=True, exist_ok=True)
+            return dir_path / f"{entry.id}.md"
+        
+        elif entry.entry_type == EntryType.WORKFLOW:
+            # Simple workflows directory
+            dir_path = self.data_dir / 'workflows'
             dir_path.mkdir(parents=True, exist_ok=True)
             return dir_path / f"{entry.id}.md"
     

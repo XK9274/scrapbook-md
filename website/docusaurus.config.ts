@@ -1,10 +1,70 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import * as fs from 'fs';
+import * as path from 'path';
+
+// Helper function to check if a category has content
+function hasContent(categoryPath: string): boolean {
+  try {
+    const fullPath = path.join(__dirname, 'docs', categoryPath);
+    const files = fs.readdirSync(fullPath);
+    return files.some(file => file.endsWith('.md'));
+  } catch {
+    return false;
+  }
+}
+
+// Build navbar items based on content availability
+function buildNavbarItems() {
+  const items: any[] = [
+    {
+      to: '/',
+      position: 'left' as const,
+      html: '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" /></svg>',
+      'aria-label': 'Home',
+    },
+    // Always include CLI
+    {
+      to: '/docs/category/cli',
+      position: 'left' as const,
+      label: 'CLI',
+    }
+  ];
+
+  // Categories to check for content
+  const categories = [
+    { path: 'ideas', label: 'Ideas' },
+    { path: 'todos', label: 'Todos' },
+    { path: 'journal', label: 'Journal' },
+    { path: 'workflows', label: 'Workflows' },
+    { path: 'diagrams', label: 'Diagrams' },
+    { path: 'prompts', label: 'Prompts' },
+  ];
+
+  // Add categories that have content
+  categories.forEach(category => {
+    if (hasContent(category.path)) {
+      items.push({
+        to: `/docs/category/${category.path}`,
+        position: 'left' as const,
+        label: category.label,
+      });
+    }
+  });
+
+  // Add right-side items
+  items.push({
+    type: 'search',
+    position: 'right',
+  });
+
+  return items;
+}
 
 const config: Config = {
-  title: 'Scrapbook',
-  tagline: 'Your personal knowledge wiki for ideas, prompts, and todos',
+  title: ' ',
+  tagline: 'Your personal knowledge management system',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -34,16 +94,9 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Use symlinked docs folder
           path: './docs',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
         },
-        blog: {
-          showReadingTime: true,
-          blogTitle: 'Recent Entries',
-          blogDescription: 'Latest scrapbook entries',
-          postsPerPage: 10,
-          blogSidebarTitle: 'Recent entries',
-          blogSidebarCount: 'ALL',
-        },
+        blog: false, // Disable blog for now to avoid routing conflicts
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -51,103 +104,45 @@ const config: Config = {
     ],
   ],
 
+  markdown: {
+    mermaid: true,
+  },
+
+  themes: ['@docusaurus/theme-mermaid'],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/scrapbook-social-card.jpg',
-    navbar: {
-      title: 'Scrapbook',
-      logo: {
-        alt: 'Scrapbook Logo',
-        src: 'img/logo.svg',
-      },
-      items: [
-        {
-          to: '/ideas',
-          position: 'left',
-          label: '💡 Ideas',
-        },
-        {
-          to: '/prompts',
-          position: 'left',
-          label: '📝 Prompts',
-        },
-        {
-          to: '/todos',
-          position: 'left',
-          label: '✅ Todos',
-        },
-        {
-          to: '/journal',
-          position: 'left',
-          label: '📔 Journal',
-        },
-        {
-          to: '/tags',
-          position: 'left',
-          label: '🏷️ Tags',
-        },
-        {
-          href: 'https://github.com/your-org/scrapbook-md',
-          label: 'GitHub',
-          position: 'right',
-        },
-      ],
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Content',
-          items: [
-            {
-              label: 'Ideas',
-              to: '/ideas',
-            },
-            {
-              label: 'Prompts',
-              to: '/prompts',
-            },
-            {
-              label: 'Todos',
-              to: '/todos',
-            },
-          ],
-        },
-        {
-          title: 'Tools',
-          items: [
-            {
-              label: 'CLI Documentation',
-              href: 'https://github.com/your-org/scrapbook-md#cli-usage',
-            },
-            {
-              label: 'Search',
-              to: '/search',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Recent Entries',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/your-org/scrapbook-md',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Scrapbook. Built with Docusaurus.`,
+    navbar: {
+      hideOnScroll: false,
+      items: buildNavbarItems(),
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // Search will be enabled when configured
+    mermaid: {
+      theme: {
+        light: 'neutral',
+        dark: 'dark'
+      },
+      options: {
+        maxTextSize: 90000,
+      },
+    },
   } satisfies Preset.ThemeConfig,
+
+  scripts: [
+    {
+      src: '/js/force-dark-theme.js',
+      async: false,
+    },
+  ],
 
   plugins: [],
 };

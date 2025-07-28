@@ -51,9 +51,16 @@ build/
 
 # Docker
 .docker/
+docker-compose.override.yml
+.dockerignore
+*.dockerfile.swp
 
-# Data files (optional - exclude if you want to track them)
-# data/
+# Docker volumes and data
+volumes/
+docker-data/
+
+# Docker build cache
+.docker-cache/
 
 # Logs
 *.log
@@ -71,4 +78,35 @@ config/*.json
 website/build/
 
 # Generated documentation
-website/docs/
+website/docs/**/*.md
+!website/docs/index.md
+!website/docs/intro.md
+!website/docs/**/index.md
+!website/docs/**/_category_.json
+
+# Personal data - exclude all actual content entries
+website/docs/ideas/**/*.md
+website/docs/prompts/**/*.md
+website/docs/todos/**/*.md
+website/docs/journal/**/*.md
+website/docs/tags/**/*.md
+!website/docs/ideas/_category_.json
+!website/docs/prompts/_category_.json
+!website/docs/todos/_category_.json
+!website/docs/journal/_category_.json
+!website/docs/tags/_category_.json
+
+# CLI data directory
+data/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!docusaurus.config.ts
+
+# Personal scrapbook entries
+ideas/
+prompts/
+todos/
+journal/
+tags/

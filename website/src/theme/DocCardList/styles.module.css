@@ -1,0 +1,72 @@
+.docCardListItem {
+  margin-bottom: 2rem;
+}
+
+.docCardListItem > * {
+  height: 100%;
+}
+
+/* Content type specific styling */
+.docCardListItem--idea {
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.docCardListItem--idea:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.docCardListItem--prompt {
+  border-left: 4px solid #ff6b35;
+}
+
+.docCardListItem--prompt:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+.docCardListItem--todo {
+  border-left: 4px solid #28a745;
+}
+
+.docCardListItem--todo:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.docCardListItem--journal {
+  border-left: 4px solid #ff6b35;
+}
+
+.docCardListItem--journal:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(111, 66, 193, 0.2);
+}
+
+.docCardListItem--default {
+  border-left: 4px solid #6c757d;
+}
+
+.docCardListItem--workflow {
+  border-left: 4px solid #20c997;
+}
+
+.docCardListItem--workflow:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(32, 201, 151, 0.2);
+}
+
+.docCardListItem--diagram {
+  border-left: 4px solid #fd7e14;
+}
+
+.docCardListItem--diagram:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(253, 126, 20, 0.2);
+}
