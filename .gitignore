@@ -83,6 +83,7 @@ website/docs/**/*.md
 !website/docs/intro.md
 !website/docs/**/index.md
 !website/docs/**/_category_.json
+!website/docs/slash-commands/**/*.md
 
 # Personal data - exclude all actual content entries
 website/docs/ideas/**/*.md
