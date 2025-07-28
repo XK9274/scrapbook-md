@@ -387,16 +387,16 @@ span.token.plain,
 
 
 /* Universal SVG Icon Styling */
-svg {
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) {
   fill: #ff6b35 !important;
   color: #ff6b35 !important;
 }
 
-svg path,
-svg g,
-svg circle,
-svg rect,
-svg polygon {
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) path,
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) g,
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) circle,
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) rect,
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) polygon {
   fill: #ff6b35 !important;
   stroke: #ff6b35 !important;
 }
@@ -627,4 +627,240 @@ aside svg {
     box-shadow: none;
     border: 1px solid var(--border);
   }
+}
+
+/* Mermaid Diagram Styling - Dark Theme */
+.mermaid,
+[id^="mermaid-"],
+.mermaid-diagram {
+  background: transparent !important;
+}
+
+/* Mermaid SVG Reset - Override universal styling */
+.mermaid svg,
+[id^="mermaid-"] svg,
+.mermaid-diagram svg {
+  background: transparent !important;
+  fill: none !important;
+  color: inherit !important;
+}
+
+/* Mermaid Flowchart Styling */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .node .label,
+.mermaid .nodeLabel {
+  color: #d1d5db !important;
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .edgePath .path {
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
+
+.mermaid .edgeLabel {
+  background-color: #171717 !important;
+  color: #d1d5db !important;
+  fill: #d1d5db !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+}
+
+/* Mermaid Sequence Diagram */
+.mermaid .actor {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .actor-line {
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 3, 3 !important;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: #0043c9 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .messageText {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+/* Mermaid Gantt Chart */
+.mermaid .section0,
+.mermaid .section1,
+.mermaid .section2,
+.mermaid .section3 {
+  fill: #374151 !important;
+}
+
+.mermaid .task0,
+.mermaid .task1,
+.mermaid .task2,
+.mermaid .task3 {
+  fill: #4b5563 !important;
+  stroke: #6b7280 !important;
+}
+
+.mermaid .taskText0,
+.mermaid .taskText1,
+.mermaid .taskText2,
+.mermaid .taskText3 {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .grid .tick {
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+  opacity: 0.5 !important;
+}
+
+/* Mermaid Pie Chart */
+.mermaid .pieCircle {
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .pieTitleText {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.mermaid .slice {
+  stroke: #171717 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .legendText {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+/* Mermaid Git Graph */
+.mermaid .commit-id,
+.mermaid .commit-msg,
+.mermaid .branch-label {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .commit-dot {
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+/* Mermaid Class Diagram */
+.mermaid .classBox {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .classText {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .relation {
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+/* Mermaid State Diagram */
+.mermaid .state-note {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .state-note text {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+/* Mermaid ER Diagram */
+.mermaid .er.entityBox {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .er.entityLabel {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .er.relationshipLine {
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+/* Mermaid User Journey */
+.mermaid .journey-section {
+  fill: #374151 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid .journey-task {
+  fill: #4b5563 !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+}
+
+.mermaid .journey-actor {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+/* Mermaid Text Elements */
+.mermaid text {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+}
+
+.mermaid .label text {
+  fill: #d1d5db !important;
+}
+
+/* Mermaid Arrows and Markers */
+.mermaid marker {
+  fill: #6b7280 !important;
+  stroke: #6b7280 !important;
+}
+
+.mermaid .arrowheadPath {
+  fill: #6b7280 !important;
+  stroke: #6b7280 !important;
+}
+
+/* Mermaid Background and Container */
+.mermaid .cluster rect {
+  fill: rgba(55, 65, 81, 0.3) !important;
+  stroke: #6b7280 !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 5, 5 !important;
+}
+
+.mermaid .cluster text {
+  fill: #d1d5db !important;
+  font-family: inherit !important;
+  font-weight: bold !important;
 }
