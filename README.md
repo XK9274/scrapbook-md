@@ -89,6 +89,23 @@ npm start
 
 Visit http://localhost:3000 to view your scrapbook.
 
+## Docker
+
+For a containerized setup, use Docker Compose:
+
+```bash
+# Start the website in a container
+docker compose up -d
+
+# View logs
+docker compose logs -f
+
+# Stop the container
+docker compose down
+```
+
+The website will be available at http://localhost:3000.
+
 ## Project Structure
 
 ```
