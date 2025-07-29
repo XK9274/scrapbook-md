@@ -5,6 +5,8 @@
   "description": "Scrapbook documentation site built with Docusaurus",
   "scripts": {
     "docusaurus": "docusaurus",
+    "prebuild": "node scripts/generate-todo-manifest.js",
+    "prestart": "node scripts/generate-todo-manifest.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -16,6 +18,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@caldwell619/react-kanban": "^0.0.12",
     "@docusaurus/core": "^3.1.0",
     "@docusaurus/plugin-content-blog": "^3.1.0",
     "@docusaurus/plugin-content-docs": "^3.1.0",
@@ -24,6 +27,7 @@
     "@docusaurus/theme-mermaid": "^3.8.1",
     "@docusaurus/theme-search-algolia": "^3.1.0",
     "@easyops-cn/docusaurus-search-local": "^0.52.1",
+    "@hello-pangea/dnd": "^18.0.1",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "@mdx-js/react": "^3.0.0",

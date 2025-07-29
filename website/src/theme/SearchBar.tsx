@@ -104,8 +104,7 @@ export default function SearchBar() {
             borderRadius: '4px',
             background: 'var(--ifm-background-color)',
             color: 'var(--ifm-font-color-base)',
-            transition: 'width 0.2s ease',
-            fontSize: '0.9rem'
+            transition: 'width 0.2s ease'
           }}
         />
       </form>
@@ -126,7 +125,7 @@ export default function SearchBar() {
         }}>
           {results.length > 0 ? (
             <div>
-              <div style={{ fontSize: '0.75rem', opacity: 0.6, marginBottom: '0.5rem' }}>
+              <div style={{ opacity: 0.6, marginBottom: '0.5rem' }}>
                 Found {results.length} result{results.length !== 1 ? 's' : ''}
               </div>
               {results.map((result, index) => (
@@ -139,7 +138,6 @@ export default function SearchBar() {
                     borderRadius: '4px',
                     marginBottom: index < results.length - 1 ? '4px' : 0,
                     background: 'var(--ifm-color-emphasis-100)',
-                    fontSize: '0.85rem',
                     transition: 'background 0.2s ease'
                   }}
                   onMouseOver={(e) => {
@@ -150,12 +148,12 @@ export default function SearchBar() {
                   }}
                 >
                   <div style={{ fontWeight: 500 }}>{result.title}</div>
-                  <div style={{ fontSize: '0.75rem', opacity: 0.7 }}>{result.path}</div>
+                  <div style={{ opacity: 0.7 }}>{result.path}</div>
                 </div>
               ))}
             </div>
           ) : (
-            <div style={{ fontSize: '0.85rem', opacity: 0.7 }}>
+            <div style={{ opacity: 0.7 }}>
               No results found for "{query}"
             </div>
           )}

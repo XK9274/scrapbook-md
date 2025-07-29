@@ -896,3 +896,25 @@ input[type="search"]:focus,
   user-select: none;
   width: 100% !important;
 }
+
+/* Full width layout for Kanban Board page */
+[data-page="todos/index"] .docItemCol {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Scale down Kanban board on todos index page */
+[data-page="todos/index"] .kanbanContainer,
+[data-page="todos/index"] .react-kanban-board {
+  transform: scale(0.75);
+  transform-origin: top left;
+  width: 133.33%; /* Compensate for scale to maintain full width */
+}
+
+/* Universal .react-kanban-board styling for todos page */
+.react-kanban-board {
+  background: #0000 !important;
+  padding: 0 !important;
+  transform: scale(0.95) !important;
+  transform-origin: top left !important;
+}

@@ -24,6 +24,12 @@ function buildNavbarItems() {
       html: '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" /></svg>',
       'aria-label': 'Home',
     },
+    // Add Kanban after home icon
+    {
+      to: '/kanban',
+      position: 'left' as const,
+      label: 'Kanban',
+    },
     // Always include CLI
     {
       to: '/docs/category/cli',
@@ -116,8 +122,8 @@ const config: Config = {
     image: 'img/scrapbook-social-card.jpg',
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: true,
-      respectPrefersColorScheme: false,
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
     },
     navbar: {
       hideOnScroll: false,
