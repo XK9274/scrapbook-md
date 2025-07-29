@@ -182,6 +182,88 @@ def show_stats(ctx):
             click.echo(f"  {tag}: {count}")
 
 
+@main.command('random-todo')
+@click.option('--status', '-s', type=click.Choice(['active', 'completed', 'archived']),
+              default='active', help='Filter by todo status (default: active)')
+@click.option('--priority', '-p', type=click.Choice(['low', 'medium', 'high', 'urgent']),
+              help='Filter by priority level')
+@click.pass_context
+def random_todo(ctx, status, priority):
+    """Get a random todo entry (useful for LLMs to suggest work)."""
+    import random
+    from datetime import datetime
+    
+    storage = ctx.obj['storage']
+    
+    # Get all todos
+    todos = storage.list_entries(entry_type=EntryType.TODO, limit=1000)
+    
+    # Filter by status
+    if status:
+        todos = [t for t in todos if t.get('status', 'active') == status]
+    
+    # Filter by priority if specified
+    if priority:
+        todos = [t for t in todos if t.get('priority') == priority]
+    
+    if not todos:
+        status_msg = f" with status '{status}'" if status != 'active' else ""
+        priority_msg = f" and priority '{priority}'" if priority else ""
+        click.echo(f"No todos found{status_msg}{priority_msg}.")
+        return
+    
+    # Select random todo
+    random_todo = random.choice(todos)
+    
+    # Display the random todo
+    click.echo("🎯 Random Todo Selected:")
+    click.echo(f"Title: {random_todo['title']}")
+    click.echo(f"ID: {random_todo['id']}")
+    click.echo(f"Type: {random_todo['type']}")
+    click.echo(f"Status: {random_todo.get('status', 'active')}")
+    if random_todo.get('priority'):
+        click.echo(f"Priority: {random_todo['priority']}")
+    click.echo(f"Created: {random_todo['created_date'][:10]}")
+    if random_todo.get('tags'):
+        click.echo(f"Tags: {', '.join(random_todo['tags'])}")
+    click.echo()
+    
+    # Try to read and display the content
+    try:
+        config = ctx.obj['config']
+        data_dir = config.get_data_dir()
+        file_path = data_dir / random_todo['file_path']
+        
+        if file_path.exists():
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                
+            # Extract content between frontmatter and first heading
+            lines = content.split('\n')
+            in_content = False
+            content_lines = []
+            
+            for line in lines:
+                if line.startswith('---') and not in_content:
+                    in_content = True
+                    continue
+                elif line.startswith('---') and in_content:
+                    in_content = False
+                    continue
+                elif not in_content and line.startswith('# '):
+                    continue  # Skip title heading
+                elif not in_content:
+                    content_lines.append(line)
+            
+            content_text = '\n'.join(content_lines).strip()
+            if content_text:
+                click.echo("Content:")
+                click.echo(content_text)
+                
+    except Exception as e:
+        click.echo(f"Could not read todo content: {e}")
+
+
 @main.command('config')
 @click.option('--set', 'set_config', nargs=2, help='Set config key value')
 @click.option('--get', 'get_config', help='Get config value')
