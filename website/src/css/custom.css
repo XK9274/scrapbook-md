@@ -303,9 +303,11 @@ html[data-theme='light'] .navbar button svg {
   vertical-align: middle !important;
 }
 
-/* Layout Adjustments for Positioned Hero */
-body,
-.main-wrapper {
+/* Layout Adjustments for Positioned Hero - Homepage Only */
+[data-page="index"] body,
+[data-page="index"] .main-wrapper,
+body:has(.heroBanner_qdFl),
+.main-wrapper:has(.heroBanner_qdFl) {
   position: relative !important;
   min-height: calc(100vh - 60px) !important;
   overflow: hidden !important;
