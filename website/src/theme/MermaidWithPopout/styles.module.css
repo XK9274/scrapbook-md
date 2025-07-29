@@ -1,0 +1,172 @@
+/* Container for the mermaid diagram with hover effect */
+.mermaidContainer {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mermaidContainer:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.mermaidContainer:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Expand icon overlay */
+.expandIcon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 4px;
+  padding: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mermaidContainer:hover .expandIcon {
+  opacity: 1;
+}
+
+/* Modal overlay - fullscreen */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Diagram container - zoomable and pannable */
+.diagramContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  user-select: none;
+}
+
+/* Controls panel */
+.controls {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  z-index: 10;
+}
+
+.controls button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.controls button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.controls span {
+  font-size: 14px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Close button */
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.closeButton:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Ensure mermaid diagram displays properly */
+.diagramContainer :global(.mermaid) {
+  max-width: none !important;
+  max-height: none !important;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme diagram background */
+[data-theme="dark"] .diagramContainer :global(.mermaid) {
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+/* Animation for modal */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal {
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .controls {
+    top: 10px;
+    right: 10px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .closeButton {
+    top: 10px;
+    right: 10px;
+  }
+}
