@@ -4,6 +4,7 @@ File storage management for scrapbook entries.
 
 import json
 import yaml
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -89,40 +90,61 @@ class StorageManager:
         self._save_counters()
         return f"{type_name}-{self.counters[type_name]:03d}"
     
-    def _get_file_path(self, entry: ScrapEntry) -> Path:
-        """Get file path for entry based on type - flat structure for Docusaurus."""
-        if entry.entry_type == EntryType.IDEA:
-            # Simple ideas directory
-            dir_path = self.data_dir / 'ideas'
-            dir_path.mkdir(parents=True, exist_ok=True)
-            return dir_path / f"{entry.id}.md"
-        
-        elif entry.entry_type == EntryType.PROMPT:
-            # Simple prompts directory
-            dir_path = self.data_dir / 'prompts'
-            dir_path.mkdir(parents=True, exist_ok=True)
-            return dir_path / f"{entry.id}.md"
-        
-        elif entry.entry_type == EntryType.TODO:
-            # Simple todos directory
-            dir_path = self.data_dir / 'todos'
-            dir_path.mkdir(parents=True, exist_ok=True)
-            return dir_path / f"{entry.id}.md"
-        
-        elif entry.entry_type == EntryType.JOURNAL:
-            # Simple journal directory
-            dir_path = self.data_dir / 'journal'
-            dir_path.mkdir(parents=True, exist_ok=True)
-            return dir_path / f"{entry.id}.md"
-        
-        elif entry.entry_type == EntryType.WORKFLOW:
-            # Simple workflows directory
-            dir_path = self.data_dir / 'workflows'
-            dir_path.mkdir(parents=True, exist_ok=True)
-            return dir_path / f"{entry.id}.md"
+    def _title_to_snake_case(self, title: str) -> str:
+        """Convert title to snake_case filename."""
+        # Remove special characters and replace with spaces
+        clean_title = re.sub(r'[^\w\s-]', '', title)
+        # Replace spaces and hyphens with underscores
+        snake_case = re.sub(r'[\s-]+', '_', clean_title.strip())
+        # Convert to lowercase
+        snake_case = snake_case.lower()
+        # Remove leading/trailing underscores
+        snake_case = snake_case.strip('_')
+        # Limit length for filesystem compatibility
+        if len(snake_case) > 50:
+            snake_case = snake_case[:50].rstrip('_')
+        return snake_case
     
-    def save_entry(self, entry: ScrapEntry) -> str:
-        """Save entry to file and return the assigned ID."""
+    def _get_file_path(self, entry: ScrapEntry) -> Path:
+        """Get file path for entry based on type - uses snake_case filename from title."""
+        # Generate snake_case filename from title
+        filename = self._title_to_snake_case(entry.title)
+        
+        # Fallback to ID if title results in empty filename
+        if not filename:
+            filename = entry.id
+        
+        # Handle potential filename conflicts by appending ID if needed
+        base_filename = filename
+        counter = 1
+        
+        if entry.entry_type == EntryType.IDEA:
+            dir_path = self.data_dir / 'ideas'
+        elif entry.entry_type == EntryType.PROMPT:
+            dir_path = self.data_dir / 'prompts'
+        elif entry.entry_type == EntryType.TODO:
+            dir_path = self.data_dir / 'todos'
+        elif entry.entry_type == EntryType.JOURNAL:
+            dir_path = self.data_dir / 'journal'
+        elif entry.entry_type == EntryType.WORKFLOW:
+            dir_path = self.data_dir / 'workflows'
+        else:
+            # Fallback
+            dir_path = self.data_dir / entry.entry_type.value
+        
+        dir_path.mkdir(parents=True, exist_ok=True)
+        
+        # Check for filename conflicts and append counter if needed
+        file_path = dir_path / f"{filename}.md"
+        while file_path.exists():
+            filename = f"{base_filename}_{counter}"
+            file_path = dir_path / f"{filename}.md"
+            counter += 1
+        
+        return file_path
+    
+    def save_entry(self, entry: ScrapEntry) -> tuple[str, Path]:
+        """Save entry to file and return the assigned ID and file path."""
         # Assign ID if not present
         if not entry.id:
             entry.id = self._get_next_id(entry.entry_type)
@@ -157,7 +179,7 @@ class StorageManager:
         # Update search index
         self._update_index(entry, file_path)
         
-        return entry.id
+        return entry.id, file_path
     
     def _update_index(self, entry: ScrapEntry, file_path: Path) -> None:
         """Update search index with new entry."""

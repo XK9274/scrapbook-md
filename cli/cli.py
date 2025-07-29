@@ -4,6 +4,7 @@ Command-line interface for scrapbook.
 
 import click
 from datetime import datetime
+from pathlib import Path
 from typing import List, Optional
 try:
     from .models import ScrapEntry, EntryType, Status, Priority
@@ -224,9 +225,17 @@ def _add_entry(ctx, entry_type: EntryType, title: str, content: str,
         entry.priority = Priority(priority)
     
     # Save entry
-    entry_id = storage.save_entry(entry)
+    entry_id, file_path = storage.save_entry(entry)
     
-    click.echo(f"{entry_type.value.title()} saved with ID: {entry_id}")
+    # Get relative path from current working directory for better readability
+    try:
+        rel_path = file_path.relative_to(Path.cwd())
+        path_display = str(rel_path)
+    except ValueError:
+        # If not relative to cwd, show full path
+        path_display = str(file_path)
+    
+    click.echo(f"{entry_type.value.title()} saved as: {path_display}")
 
 
 def _display_entry_summary(entry: dict):
