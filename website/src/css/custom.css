@@ -138,7 +138,7 @@ html[data-theme='dark'] {
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+  transform: translate(-50%, calc(-50% - 30px)) !important;
   z-index: 1 !important;
   background: transparent !important;
 }
@@ -307,7 +307,8 @@ html[data-theme='light'] .navbar button svg {
 body,
 .main-wrapper {
   position: relative !important;
-  min-height: 100vh !important;
+  min-height: calc(100vh - 60px) !important;
+  overflow: hidden !important;
 }
 
 /* Content Type Styling */
