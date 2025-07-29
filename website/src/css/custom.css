@@ -884,3 +884,15 @@ input[type="search"]:focus,
   outline: none !important;
   text-align: center !important;
 }
+ 
+/* increase the width on the mermaid diagram container */
+[class*="diagramContainer"] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 100% !important;
+}
