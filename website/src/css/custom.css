@@ -865,3 +865,20 @@ aside svg {
   font-family: inherit !important;
   font-weight: bold !important;
 }
+
+/* Docusaurus Search Bar Input Border Color */
+input[type="search"],
+.DocSearch-Input,
+.navbar__search-input {
+  border: 2px solid #ff6b35 !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+input[type="search"]:focus,
+.DocSearch-Input:focus,
+.navbar__search-input:focus {
+  border-color: #ff6b35 !important;
+  outline: none !important;
+  text-align: center !important;
+}
