@@ -32,6 +32,8 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
 }
 
 /* Custom card styling */
@@ -263,3 +265,4 @@
   background-color: var(--ifm-color-emphasis-200);
   border-color: var(--ifm-color-emphasis-300);
 }
+

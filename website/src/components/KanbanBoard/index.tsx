@@ -32,6 +32,7 @@ interface KanbanBoardProps {
   className?: string;
   allowAddCards?: boolean;
   allowDeleteCards?: boolean;
+  allowAddColumns?: boolean;
   cardHeight?: number;
   disableColumnDrag?: boolean;
   disableCardDrag?: boolean;
@@ -52,6 +53,7 @@ const KanbanBoardClient = ({
   className,
   allowAddCards = true,
   allowDeleteCards = true,
+  allowAddColumns = true,
   cardHeight = 100,
   disableColumnDrag = false,
   disableCardDrag = false
@@ -233,7 +235,7 @@ const KanbanBoardClient = ({
         allowRemoveColumn={true}
         onColumnRename={handleColumnRename}
         allowRenameColumn={true}
-        renderColumnAdder={renderColumnAdder}
+        renderColumnAdder={allowAddColumns ? renderColumnAdder : undefined}
       />
     </div>
   );
