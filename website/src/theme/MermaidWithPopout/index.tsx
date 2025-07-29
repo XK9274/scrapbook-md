@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, type ReactNode } from 'react';
-import Mermaid from '@theme/Mermaid';
+import OriginalMermaid from '@theme-original/Mermaid';
 import type { Props } from '@theme/Mermaid';
 import styles from './styles.module.css';
 
@@ -121,7 +121,7 @@ export default function MermaidWithPopout(props: MermaidWithPopoutProps): ReactN
         aria-label="Click to open diagram in fullscreen"
         title="Click to open diagram in fullscreen"
       >
-        <Mermaid {...props} />
+        <OriginalMermaid {...props} />
         <div className={styles.expandIcon}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M7,14H5v5h5v-2H7V14z M5,10h2V7h3V5H5V10z M17,17h-3v2h5v-5h-2V17z M14,5v2h3v3h2V5H14z"/>
@@ -170,7 +170,7 @@ export default function MermaidWithPopout(props: MermaidWithPopoutProps): ReactN
             }}
             onMouseDown={handleMouseDown}
           >
-            <Mermaid {...props} />
+            <OriginalMermaid {...props} />
           </div>
         </div>
       )}
