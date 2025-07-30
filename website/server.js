@@ -76,15 +76,15 @@ app.post('/update-todo-status', (req, res) => {
     }
     
     fs.writeFileSync(todoPath, content);
-    console.log(`✅ Updated TODO ${todoId} status to ${newStatus}`);
+    console.log(`Updated TODO ${todoId} status to ${newStatus}`);
 
     // Regenerate manifest to reflect the change
     try {
       const { execSync } = require('child_process');
       execSync('node scripts/generate-todo-manifest.js', { cwd: __dirname });
-      console.log('📋 Manifest regenerated successfully');
+      console.log('Manifest regenerated successfully');
     } catch (error) {
-      console.error('❌ Failed to regenerate manifest:', error.message);
+      console.error('Failed to regenerate manifest:', error.message);
     }
 
     res.json({ 
@@ -96,7 +96,7 @@ app.post('/update-todo-status', (req, res) => {
     });
 
   } catch (error) {
-    console.error('❌ Error updating TODO:', error);
+    console.error('Error updating TODO:', error);
     res.status(500).json({ 
       message: 'Failed to update TODO', 
       error: error.message 
@@ -110,17 +110,17 @@ app.get('/health', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 TODO update server running on http://localhost:${PORT}`);
-  console.log(`📋 Ready to handle kanban drag updates`);
+  console.log(`TODO update server running on http://localhost:${PORT}`);
+  console.log(`Ready to handle kanban drag updates`);
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
-  console.log('🛑 Shutting down TODO update server...');
+  console.log('Shutting down TODO update server...');
   process.exit(0);
 });
 
 process.on('SIGINT', () => {
-  console.log('🛑 Shutting down TODO update server...');
+  console.log('Shutting down TODO update server...');
   process.exit(0);
 });
