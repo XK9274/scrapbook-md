@@ -22,59 +22,29 @@ const TodoKanbanBoard = () => {
       ];
       
       todoFiles.forEach((todo, index) => {
-        const columnId = todo.status === 'active' ? 1 : 
-                       todo.status === 'in-progress' ? 3 : 5;
+        let columnId;
+        switch(todo.status) {
+          case 'active': columnId = 1; break;
+          case 'active-secondary': columnId = 2; break;
+          case 'in-progress': columnId = 3; break;
+          case 'in-progress-secondary': columnId = 4; break;
+          case 'completed': columnId = 5; break;
+          default: columnId = 1; // fallback to first column
+        }
         const column = columns.find(col => col.id === columnId);
         
         if (column) {
+          // Generate note link based on todo id
+          const noteLink = `/docs/todos/${todo.id}`;
+            
           const taskCard = {
             id: index + 1,
+            noteId: todo.id,
+            noteLink: noteLink,
             title: todo.title,
-            description: (
-              <div>
-                <div style={{ marginBottom: '0.5rem', fontSize: '0.8rem', color: 'var(--ifm-font-color-secondary)' }}>
-                  {todo.context && todo.context.length > 50 
-                    ? `${todo.context.substring(0, 50)}...` 
-                    : todo.context || 'No context'}
-                </div>
-                {todo.tags && todo.tags.length > 0 && (
-                  <div style={{ 
-                    display: 'flex', 
-                    flexWrap: 'wrap', 
-                    gap: '0.25rem', 
-                    marginBottom: '0.5rem' 
-                  }}>
-                    {todo.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        style={{
-                          backgroundColor: '#ff6b35',
-                          color: '#1a1a1a',
-                          padding: '0.125rem 0.375rem',
-                          fontSize: '0.625rem',
-                          fontWeight: '600',
-                          borderRadius: '0',
-                          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {todo.date && (
-                  <div style={{ 
-                    fontSize: '0.7rem', 
-                    color: 'var(--ifm-font-color-secondary)',
-                    fontStyle: 'italic'
-                  }}>
-                    {new Date(todo.date).toLocaleDateString()}
-                  </div>
-                )}
-              </div>
-            ),
+            description: todo.context || 'No context available',
             priority: todo.priority,
-            assignee: 'TODO System'
+            tags: todo.tags || []
           };
           column.cards.push(taskCard);
         }

@@ -30,6 +30,26 @@ const DefaultCard: React.FC<{
     return styles[`priority-${priority}`];
   };
 
+  // Truncate description to 50 characters
+  const getDisplayDescription = (description?: string | React.ReactNode) => {
+    if (typeof description === 'string') {
+      return description.length > 50 ? `${description.substring(0, 50)}...` : description;
+    }
+    // If description is JSX, extract text content and truncate
+    if (React.isValidElement(description)) {
+      const textContent = description.props?.children?.[0]?.props?.children || '';
+      return typeof textContent === 'string' && textContent.length > 50 
+        ? `${textContent.substring(0, 50)}...` 
+        : textContent;
+    }
+    return description;
+  };
+
+  // Use the note link from the card data, or generate a fallback
+  const getNoteLink = () => {
+    return card.noteLink || `/docs/todos/${card.noteId || card.id}`;
+  };
+
   return (
     <div className={`${styles.kanbanCard} ${dragging ? styles.dragging : ''}`}>
       <div className={styles.cardHeader}>
@@ -47,7 +67,9 @@ const DefaultCard: React.FC<{
       </div>
       
       {card.description && (
-        <p className={styles.cardDescription}>{card.description}</p>
+        <p className={styles.cardDescription}>
+          {getDisplayDescription(card.description)}
+        </p>
       )}
       
       <div className={styles.cardFooter}>
@@ -67,16 +89,14 @@ const DefaultCard: React.FC<{
           </div>
         )}
         
-        {card.assignee && (
-          <span className={styles.cardAssignee}>@{card.assignee}</span>
-        )}
+        <a 
+          href={getNoteLink()} 
+          className={styles.noteLink}
+          onClick={(e) => e.stopPropagation()}
+        >
+          Go to Note
+        </a>
       </div>
-      
-      {card.dueDate && (
-        <div className={styles.cardFooter}>
-          <small>Due: {new Date(card.dueDate).toLocaleDateString()}</small>
-        </div>
-      )}
     </div>
   );
 };

@@ -215,6 +215,7 @@ html[data-theme='dark'] {
   z-index: 3 !important;
   font-weight: 600 !important;
   text-decoration: none !important;
+  color:#1e1e20 !important;
 }
 
 .hero .button:hover {
@@ -224,7 +225,6 @@ html[data-theme='dark'] {
 }
 
 .hero .button--outline {
-  background: #323234 !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: #ff6b35 !important;
   border-left: 4px solid #ff6b35 !important;

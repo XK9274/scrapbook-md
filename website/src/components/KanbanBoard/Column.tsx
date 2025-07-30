@@ -239,6 +239,7 @@ export const Column: React.FC<ColumnProps> = ({
               display: 'inline-block',
               verticalAlign: 'top',
               marginRight: '1rem',
+              width: '280px',
               ...provided.draggableProps.style
             }}
             className="react-kanban-column"

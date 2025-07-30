@@ -11,11 +11,14 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Expose development port
-EXPOSE 3000
+# Make the startup script executable
+RUN chmod +x start-dev.sh
+
+# Expose development ports
+EXPOSE 3000 3001
 
 # Default development command
-CMD ["npm", "start", "--", "--host", "0.0.0.0"]
+CMD ["./start-dev.sh"]
 
 # Build stage
 FROM node:18-alpine AS builder
