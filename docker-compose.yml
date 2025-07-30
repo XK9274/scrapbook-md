@@ -5,13 +5,14 @@ services:
       dockerfile: Dockerfile
       target: development
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Docusaurus web server
+      - "3001:3001"  # TODO API server
     volumes:
       - ./website:/app:cached
     environment:
       - NODE_ENV=development
       - FAST_REFRESH=true
-    command: npm start -- --host 0.0.0.0 --port 3000
+    command: sh /app/start-dev.sh
     restart: unless-stopped
 
 networks:
