@@ -32,25 +32,29 @@
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
 }
 
 /* Custom card styling */
 .kanbanCard {
   background: var(--ifm-card-background-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 0.75rem;
   margin-bottom: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: grab;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .kanbanCard:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.25);
 }
+
 
 .kanbanCard.dragging {
   cursor: grabbing;
@@ -119,10 +123,11 @@
 .priorityBadge {
   font-size: 0.7rem;
   padding: 0.2rem 0.5rem;
-  border-radius: 12px;
+  border-radius: 2px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .priority-low {
@@ -167,15 +172,28 @@
   padding: 0.15rem 0.4rem;
   background-color: var(--ifm-color-emphasis-100);
   color: var(--ifm-font-color-base);
-  border-radius: 8px;
+  border-radius: 2px;
   border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-/* Card assignee */
-.cardAssignee {
+/* Note link styling */
+.noteLink {
   font-size: 0.7rem;
-  color: var(--ifm-font-color-secondary);
+  padding: 0.25rem 0.5rem;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
   margin-left: auto;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.noteLink:hover {
+  background-color: var(--ifm-color-primary-dark);
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Override default kanban styles to match Docusaurus theme */
@@ -187,19 +205,21 @@
 :global(.react-kanban-column) {
   background: var(--ifm-background-surface-color) !important;
   border: 1px solid var(--ifm-color-emphasis-200) !important;
-  border-radius: 8px !important;
+  border-radius: 2px !important;
   margin: 0 0.5rem !important;
   min-width: 280px !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  max-width: 280px !important;
+  width: 280px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06) !important;
 }
 
 :global(.react-kanban-column-header) {
-  background: var(--ifm-color-emphasis-100) !important;
+  background: var(--ifm-background-surface-color) !important;
   color: var(--ifm-font-color-base) !important;
   border-bottom: 1px solid var(--ifm-color-emphasis-200) !important;
   padding: 1rem !important;
   font-weight: 600 !important;
-  border-radius: 8px 8px 0 0 !important;
+  border-radius: 2px 2px 0 0 !important;
 }
 
 :global(.react-kanban-column-header-title) {
@@ -215,7 +235,8 @@
 :global(.react-kanban-card-skeleton) {
   background: var(--ifm-color-emphasis-100) !important;
   border: 2px dashed var(--ifm-color-emphasis-300) !important;
-  border-radius: 8px !important;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Responsive design */
@@ -242,6 +263,27 @@
 [data-theme='dark'] .kanbanCard {
   background: var(--ifm-background-surface-color);
   border-color: var(--ifm-color-emphasis-300);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .kanbanCard:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .priorityBadge {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .cardTag {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .noteLink {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .noteLink:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme='dark'] .priority-low {
@@ -263,3 +305,4 @@
   background-color: var(--ifm-color-emphasis-200);
   border-color: var(--ifm-color-emphasis-300);
 }
+

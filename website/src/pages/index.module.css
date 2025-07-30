@@ -24,6 +24,16 @@
   gap: 1rem;
 }
 
+.buttons .button {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.buttons .button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
 .features {
   display: flex;
   align-items: center;

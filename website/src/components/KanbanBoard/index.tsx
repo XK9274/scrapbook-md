@@ -4,7 +4,7 @@ import { BoardContainer } from './BoardContainer';
 import { moveCard, moveColumn, addCard, removeCard, addColumn, removeColumn, changeColumn } from './boardUtils';
 import styles from './styles.module.css';
 
-// TypeScript interfaces for our Kanban data (based on README)
+// TypeScript interfaces for our Kanban data
 export interface TaskCard {
   id: number;
   title: string;
@@ -13,6 +13,8 @@ export interface TaskCard {
   tags?: string[];
   assignee?: string;
   dueDate?: string;
+  noteId?: string;
+  noteLink?: string;
 }
 
 export interface KanbanColumn {
@@ -32,6 +34,7 @@ interface KanbanBoardProps {
   className?: string;
   allowAddCards?: boolean;
   allowDeleteCards?: boolean;
+  allowAddColumns?: boolean;
   cardHeight?: number;
   disableColumnDrag?: boolean;
   disableCardDrag?: boolean;
@@ -52,6 +55,7 @@ const KanbanBoardClient = ({
   className,
   allowAddCards = true,
   allowDeleteCards = true,
+  allowAddColumns = true,
   cardHeight = 100,
   disableColumnDrag = false,
   disableCardDrag = false
@@ -71,11 +75,40 @@ const KanbanBoardClient = ({
     onBoardChange?.(newBoard);
   };
 
-  const handleCardDragEnd = ({ source, destination, subject }) => {
+  const handleCardDragEnd = async ({ source, destination, subject }) => {
     if (!destination) return;
     
+    // Update UI immediately for better UX
     const newBoard = moveCard(board, source, destination);
     handleBoardChange(newBoard);
+    
+    // Only update backend if the card has a noteId (from TODO manifest)
+    console.log('Drag data:', { subject, destination });
+    if (subject.noteId) {
+      try {
+        const requestData = {
+          todoId: subject.noteId,
+          newColumnId: destination.toColumnId
+        };
+        console.log('Sending API request:', requestData);
+        
+        const response = await fetch('http://localhost:3001/update-todo-status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Failed to update TODO status:', errorData.message);
+        } else {
+          const result = await response.json();
+          console.log('TODO status updated successfully:', result.message);
+        }
+      } catch (error) {
+        console.error('Network error updating TODO status:', error);
+      }
+    }
   };
 
   const handleColumnDragEnd = ({ source, destination, subject }) => {
@@ -233,7 +266,7 @@ const KanbanBoardClient = ({
         allowRemoveColumn={true}
         onColumnRename={handleColumnRename}
         allowRenameColumn={true}
-        renderColumnAdder={renderColumnAdder}
+        renderColumnAdder={allowAddColumns ? renderColumnAdder : undefined}
       />
     </div>
   );
