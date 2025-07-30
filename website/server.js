@@ -69,7 +69,7 @@ app.post('/update-todo-status', (req, res) => {
     let content = fs.readFileSync(todoPath, 'utf8');
     
     if (content.includes('status:')) {
-      content = content.replace(/status:\s*\w+/g, `status: ${newStatus}`);
+      content = content.replace(/status:\s*[\w-]+/g, `status: ${newStatus}`);
     } else {
       // Add status to frontmatter if it doesn't exist
       content = content.replace(/^---\n/, `---\nstatus: ${newStatus}\n`);
