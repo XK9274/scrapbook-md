@@ -68,5 +68,31 @@ class Config:
         """Get data directory as Path object."""
         data_dir = Path(self.get('data_dir'))
         if not data_dir.is_absolute():
-            data_dir = Path.cwd() / data_dir
+            # Search upwards for scrapbook-md directory
+            scrapbook_root = self._find_scrapbook_root()
+            if scrapbook_root:
+                data_dir = scrapbook_root / data_dir
+            else:
+                data_dir = Path.cwd() / data_dir
         return data_dir
+    
+    def _find_scrapbook_root(self) -> Path:
+        """Find scrapbook-md root directory by searching upwards."""
+        current = Path.cwd()
+        
+        # First check if we're already in scrapbook-md
+        if current.name == 'scrapbook-md' and (current / 'cli' / 'cli.py').exists():
+            return current
+            
+        # Search upwards for scrapbook-md directory
+        for parent in current.parents:
+            scrapbook_dir = parent / 'scrapbook-md'
+            if scrapbook_dir.exists() and (scrapbook_dir / 'cli' / 'cli.py').exists():
+                return scrapbook_dir
+                
+        # Also check if scrapbook-md is a sibling directory
+        for sibling in current.parent.iterdir():
+            if sibling.is_dir() and sibling.name == 'scrapbook-md' and (sibling / 'cli' / 'cli.py').exists():
+                return sibling
+                
+        return None
