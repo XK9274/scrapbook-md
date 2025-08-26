@@ -18,13 +18,13 @@
 }
 
 .docCardListItem--prompt {
-  border-left: 4px solid #ff6b35;
+  border-left: 4px solid var(--ifm-color-primary);
 }
 
 .docCardListItem--prompt:hover {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+  box-shadow: 0 4px 12px rgba(var(--ifm-color-primary-rgb), 0.2);
 }
 
 .docCardListItem--todo {
@@ -38,7 +38,7 @@
 }
 
 .docCardListItem--journal {
-  border-left: 4px solid #ff6b35;
+  border-left: 4px solid var(--ifm-color-primary);
 }
 
 .docCardListItem--journal:hover {

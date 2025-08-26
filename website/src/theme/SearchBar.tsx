@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useHistory, useLocation } from '@docusaurus/router';
 import { useAllDocsData } from '@docusaurus/plugin-content-docs/client';
+import ColourSelector from '../components/ColourSelector';
 
 export default function SearchBar() {
   const [query, setQuery] = useState('');
@@ -10,6 +11,9 @@ export default function SearchBar() {
   const history = useHistory();
   const location = useLocation();
   const allDocsData = useAllDocsData();
+  // Colour selector UI lives in `ColourSelector` component. It handles persistence
+  // and updates CSS variables. This file only renders the search input and the
+  // selector component to the right so the navbar layout stays clean.
 
   // Get all documents for search
   const searchData = useMemo(() => {
@@ -20,7 +24,7 @@ export default function SearchBar() {
         Object.values(version.docs).forEach(doc => {
           docs.push({
             id: doc.id,
-            title: doc.title || doc.id,
+            title: (doc as any).title || doc.id,
             path: doc.path
           });
         });
@@ -86,7 +90,7 @@ export default function SearchBar() {
   }, []);
 
   return (
-    <div className="navbar__search" style={{ position: 'relative' }}>
+  <div className="navbar__search" style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
       <form onSubmit={handleSearch}>
         <input
           ref={inputRef}
@@ -108,6 +112,7 @@ export default function SearchBar() {
           }}
         />
       </form>
+  <ColourSelector />
       {isOpen && query && (
         <div style={{
           position: 'absolute',

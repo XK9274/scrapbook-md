@@ -6,13 +6,19 @@
 /* CSS Custom Properties - Global Variables */
 :root {
   /* Content Type Colors */
-  --ideas-primary: #ff6b35;
+  --ideas-primary: var(--ifm-color-primary);
   --prompts-primary: #059669;
   --todos-primary: #dc2626;
-  --tags-primary: #ff6b35;
+  --tags-primary: var(--ifm-color-primary);
   
   /* Theme Colors - Dark Mode Forced */
   --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-rgb: 255,107,53;
+  /* ASCII banner gradient used by ColourSelector - fallback uses the primary color stops */
+  --ascii-gradient: linear-gradient(
+    to bottom,
+    var(--ifm-color-primary) 0%, var(--ifm-color-primary) 20%, var(--ifm-color-primary-dark) 40%, var(--ifm-color-primary-darker) 60%, var(--ifm-color-primary-darkest) 80%, var(--ifm-color-primary-darkest) 100%
+  );
   --ifm-color-primary-dark: #e55a2b;
   --ifm-color-primary-darker: #d9512b;
   --ifm-color-primary-darkest: #b5432a;
@@ -177,14 +183,7 @@ html[data-theme='dark'] {
   position: relative !important;
   z-index: 2 !important;
   text-shadow: inherit !important;
-  background: linear-gradient(
-    to bottom,
-    #ffff00 0%, #ffff00 20%,    /* Yellow - top line */
-    #ffa500 20%, #ffa500 40%,   /* Orange - second line */
-    #ff8c00 40%, #ff8c00 60%,   /* Dark orange - third line */
-    #ff4500 60%, #ff4500 80%,   /* Red orange - fourth line */
-    #ff0000 80%, #ff0000 100%   /* Red - bottom line */
-  ) !important;
+  background: var(--ascii-gradient) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -226,46 +225,46 @@ html[data-theme='dark'] {
 
 .hero .button--outline {
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: #ff6b35 !important;
-  border-left: 4px solid #ff6b35 !important;
+  color: var(--ifm-color-primary) !important;
+  border-left: 4px solid var(--ifm-color-primary) !important;
 }
 
 .hero .button--outline:hover {
   background: #3a3a3c !important;
   border-color: rgba(255, 255, 255, 0.3) !important;
-  color: #e55a2b !important;
-  border-left: 4px solid #e55a2b !important;
+  color: var(--ifm-color-primary-dark) !important;
+  border-left: 4px solid var(--ifm-color-primary-dark) !important;
 }
 
 .hero .button--outline svg {
-  fill: #ff6b35 !important;
-  color: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 .hero .button--outline:hover svg {
-  fill: #e55a2b !important;
-  color: #e55a2b !important;
+  fill: var(--ifm-color-primary-dark) !important;
+  color: var(--ifm-color-primary-dark) !important;
 }
 
 /* Style navbar icons - Home and Dark Mode Toggle */
 .navbar__item svg {
-  fill: #ff6b35 !important;
-  color: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 .navbar__item svg path {
-  fill: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
 }
 
 /* Navbar Link Styling */
 .navbar__link,
 .navbar__link--active {
-  color: #ff6b35 !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 .navbar__link:hover,
 .navbar__link--active:hover {
-  color: #e55a2b !important;
+  color: var(--ifm-color-primary-dark) !important;
 }
 
 /* Dark mode toggle specific styling - target all possible selectors */
@@ -284,8 +283,8 @@ button[title*="mode"] svg,
 .navbar .toggle svg,
 html[data-theme='dark'] .navbar button svg,
 html[data-theme='light'] .navbar button svg {
-  fill: #ff6b35 !important;
-  color: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 /* Home Icon Specific Styling */
@@ -314,33 +313,18 @@ body:has(.heroBanner_qdFl),
 }
 
 /* Content Type Styling */
-.content-type-idea {
-  border-left: 4px solid #ff6b35;
-  background: rgba(255, 107, 53, 0.05);
-  color: #ff6b35;
-}
-
-.content-type-prompt {
-  border-left: 4px solid #ff6b35;
-  background: rgba(255, 107, 53, 0.05);
-  color: #ff6b35;
-}
-
-.content-type-todo {
-  border-left: 4px solid #ff6b35;
-  background: rgba(255, 107, 53, 0.05);
-  color: #ff6b35;
-}
-
+.content-type-idea,
+.content-type-prompt,
+.content-type-todo,
 .content-type-tag {
-  border-left: 4px solid var(--tags-primary);
-  background: rgba(255, 107, 53, 0.05);
-  color: #ff6b35;
+  border-left: 4px solid var(--ifm-color-primary);
+  background: rgba(var(--ifm-color-primary-rgb), 0.05);
+  color: var(--ifm-color-primary);
 }
 
 /* DocCard List Item Styling - Universal Override */
 [class*="docCardListItem"] {
-  border-left: 4px solid #ff6b35 !important;
+  border-left: 4px solid var(--ifm-color-primary) !important;
 }
 
 [class*="docCardListItem"]:hover {
@@ -372,7 +356,7 @@ pre code,
 span.token.plain,
 [class*="codeBlock"] code,
 [class*="codeBlockLines"] span {
-  color: #ff6b35 !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 /* Syntax highlighting tokens */
@@ -385,14 +369,14 @@ span.token.plain,
 .token.comment,
 .token.operator,
 .token.punctuation {
-  color: #ff6b35 !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 
 /* Universal SVG Icon Styling */
 svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) {
-  fill: #ff6b35 !important;
-  color: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) path,
@@ -400,8 +384,8 @@ svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) g,
 svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) circle,
 svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) rect,
 svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) polygon {
-  fill: #ff6b35 !important;
-  stroke: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  stroke: var(--ifm-color-primary) !important;
 }
 
 /* Sidebar and Menu Universal Styling */
@@ -411,23 +395,27 @@ svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) polygon {
 .theme-doc-toc-desktop svg,
 .table-of-contents svg,
 aside svg {
-  fill: #ff6b35 !important;
-  color: #ff6b35 !important;
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
 }
 
 /* Menu Caret Icon Override */
-:root {
-  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="%23ff6b35" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>') !important;
-  --ifm-menu-link-sublist-icon-filter: none !important;
-}
-
 .menu__caret:before {
   filter: none !important;
-  background: var(--ifm-menu-link-sublist-icon) 50% / 2rem 2rem !important;
+  content: '' !important;
+  /* Use mask so the caret is filled by the element's background-color (which we set to the primary variable) */
+  display: inline-block !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  background-color: var(--ifm-color-primary) !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='white' d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/></svg>") center/1.2rem 1.2rem no-repeat !important;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='white' d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/></svg>") center/1.2rem 1.2rem no-repeat !important;
 }
 
 .menu__caret {
-  --ifm-menu-link-sublist-icon-filter: none !important;
+  color: var(--ifm-color-primary) !important; /* fallback for any inline SVGs */
 }
 
 /* Content Cards */
@@ -872,7 +860,7 @@ aside svg {
 input[type="search"],
 .DocSearch-Input,
 .navbar__search-input {
-  border: 2px solid #ff6b35 !important;
+  border: 2px solid var(--ifm-color-primary) !important;
   box-shadow: none !important;
   text-align: center !important;
 }
@@ -880,7 +868,7 @@ input[type="search"],
 input[type="search"]:focus,
 .DocSearch-Input:focus,
 .navbar__search-input:focus {
-  border-color: #ff6b35 !important;
+  border-color: var(--ifm-color-primary) !important;
   outline: none !important;
   text-align: center !important;
 }
@@ -917,5 +905,92 @@ input[type="search"]:focus,
   padding: 0 !important;
   transform: scale(0.95) !important;
   transform-origin: top left !important;
+}
+
+/* Centralized overrides to make primary colour swappable via CSS variables */
+:root {
+  /* keep default in sync with existing theme */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-rgb: 255,107,53; /* used for alpha backgrounds */
+}
+
+/* Navbar and icons use primary */
+.navbar__item svg,
+.navbar__item svg path,
+.navbar__link,
+.navbar__link--active,
+.navbar__item button svg,
+button[title*="theme"] svg,
+button[title*="mode"] svg,
+html[data-theme='dark'] .navbar__item svg,
+html[data-theme='light'] .navbar__item svg,
+svg:not(.mermaid svg):not([id^="mermaid-"]):not(.mermaid-diagram svg) {
+  fill: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+.navbar__link:hover,
+.navbar__link--active:hover,
+.hero .button--outline:hover,
+.navbar__item svg:hover {
+  color: var(--ifm-color-primary-dark) !important;
+  fill: var(--ifm-color-primary-dark) !important;
+}
+
+/* Content type and doc card borders */
+.content-type-idea,
+.content-type-prompt,
+.content-type-todo,
+.content-type-tag {
+  border-left: 4px solid var(--ifm-color-primary) !important;
+  background: rgba(var(--ifm-color-primary-rgb), 0.05) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+[class*="docCardListItem"] {
+  border-left: 4px solid var(--ifm-color-primary) !important;
+}
+
+[class*="docCardListItem"]:hover {
+  box-shadow: 0 4px 12px rgba(var(--ifm-color-primary-rgb), 0.2) !important;
+}
+
+/* Code tokens and syntax highlighting */
+.token.keyword,
+.token.function,
+.token.class-name,
+.token.string,
+.token.number,
+.token.boolean,
+.token.comment,
+.token.operator,
+.token.punctuation,
+code, pre code, .prism-code {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Search input border uses primary */
+input[type="search"],
+.DocSearch-Input,
+.navbar__search-input {
+  border: 2px solid var(--ifm-color-primary) !important;
+}
+
+input[type="search"]:focus,
+.DocSearch-Input:focus,
+.navbar__search-input:focus {
+  border-color: var(--ifm-color-primary) !important;
+}
+
+/* Tag items */
+.tag-item { background: var(--ifm-color-primary) !important; }
+.tag-item:hover { background: var(--ifm-color-primary-dark) !important; }
+
+/* Menu caret icon fallback - tint using filter won't work for data-URI, so force caret pseudo background */
+.menu__caret:before { filter: none !important; }
+
+/* Ensure the CSS overrides apply with high specificity where necessary */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }
 

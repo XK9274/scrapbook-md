@@ -41,7 +41,7 @@ export default function NotFoundContent({className}: Props): ReactNode {
               fontFamily: 'monospace',
               fontSize: '1.5rem',
               lineHeight: '1.2',
-              background: 'linear-gradient(to bottom, #ffff00 0%, #ffff00 20%, #ffa500 20%, #ffa500 40%, #ff8c00 40%, #ff8c00 60%, #ff4500 60%, #ff4500 80%, #ff0000 80%, #ff0000 100%)',
+              background: 'var(--ascii-gradient)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -90,7 +90,7 @@ export default function NotFoundContent({className}: Props): ReactNode {
               border: '1px solid var(--ifm-color-emphasis-300)',
               padding: '1.5rem',
               borderRadius: '8px',
-              borderLeft: '4px solid #ff6b35',
+              borderLeft: '4px solid var(--ifm-color-primary)',
               marginBottom: '2rem',
               textAlign: 'left',
               maxWidth: '600px',
@@ -110,7 +110,7 @@ export default function NotFoundContent({className}: Props): ReactNode {
               href="/" 
               className="button button--primary button--lg"
               style={{ 
-                background: 'linear-gradient(45deg, #ff6b35, #f7931e)',
+                background: 'linear-gradient(45deg, var(--ifm-color-primary), var(--ifm-color-primary-light))',
                 border: 'none'
               }}
             >

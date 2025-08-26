@@ -16,19 +16,19 @@ import type {MDXComponentsObject} from '@theme/MDXComponents';
 // Custom components for scrapbook content types
 const ScrapbookPrompt = ({children, category}: {children: React.ReactNode, category?: string}) => (
   <div style={{
-    background: 'linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%)',
-    border: '1px solid #ff6b35',
+  background: 'linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%)',
+  border: '1px solid var(--ifm-color-primary)',
     borderRadius: '8px',
     padding: '1rem',
     margin: '1rem 0',
-    borderLeft: '4px solid #ff6b35'
+  borderLeft: '4px solid var(--ifm-color-primary)'
   }}>
     <div style={{
       display: 'flex',
       alignItems: 'center',
       marginBottom: '0.5rem',
       fontSize: '0.9rem',
-      color: '#ff6b35',
+  color: 'var(--ifm-color-primary)',
       fontWeight: 'bold'
     }}>
       PROMPT {category && `• ${category.toUpperCase()}`}
@@ -85,19 +85,19 @@ const ScrapbookTodo = ({children, priority}: {children: React.ReactNode, priorit
 
 const ScrapbookJournal = ({children}: {children: React.ReactNode}) => (
   <div style={{
-    background: 'linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%)',
-    border: '1px solid #ff6b35',
+  background: 'linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%)',
+  border: '1px solid var(--ifm-color-primary)',
     borderRadius: '8px',
     padding: '1rem',
     margin: '1rem 0',
-    borderLeft: '4px solid #ff6b35'
+  borderLeft: '4px solid var(--ifm-color-primary)'
   }}>
     <div style={{
       display: 'flex',
       alignItems: 'center',
       marginBottom: '0.5rem',
       fontSize: '0.9rem',
-      color: '#ff6b35',
+  color: 'var(--ifm-color-primary)',
       fontWeight: 'bold'
     }}>
       JOURNAL
@@ -132,18 +132,18 @@ const ScrapbookWorkflow = ({children, category}: {children: React.ReactNode, cat
 const ScrapbookDiagram = ({children, type}: {children: React.ReactNode, type?: string}) => (
   <div style={{
     background: 'linear-gradient(135deg, #fff9f0 0%, #fff2e0 100%)',
-    border: '1px solid #fd7e14',
+  border: '1px solid #fd7e14',
     borderRadius: '8px',
     padding: '1rem',
     margin: '1rem 0',
-    borderLeft: '4px solid #fd7e14'
+  borderLeft: '4px solid #fd7e14'
   }}>
     <div style={{
       display: 'flex',
       alignItems: 'center',
       marginBottom: '0.5rem',
       fontSize: '0.9rem',
-      color: '#fd7e14',
+  color: '#fd7e14',
       fontWeight: 'bold'
     }}>
       DIAGRAM {type && `• ${type.toUpperCase()}`}
