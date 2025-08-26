@@ -181,8 +181,8 @@
 .noteLink {
   font-size: 0.7rem;
   padding: 0.25rem 0.5rem;
-  background-color: var(--ifm-color-primary);
-  color: white;
+  background-color: rgb(255, 107, 53) !important;
+  color: white !important;
   text-decoration: none;
   border-radius: 2px;
   margin-left: auto;
@@ -190,8 +190,8 @@
 }
 
 .noteLink:hover {
-  background-color: var(--ifm-color-primary-dark);
-  color: white;
+  background-color: rgb(255, 107, 53) !important;
+  color: white !important;
   text-decoration: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.25);
 }

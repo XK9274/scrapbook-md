@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import KanbanBoard from '@site/src/components/KanbanBoard';
-import todoManifest from '@site/src/data/todoManifest.json';
+// Note: we fetch the manifest at runtime from the local update server to avoid
+// the Docusaurus dev server rebuilding the page when the manifest file changes.
+// The server exposes it on /todo-manifest.
 
 
 const TodoKanbanBoard = () => {
@@ -10,9 +12,17 @@ const TodoKanbanBoard = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    try {
-      // Convert TODO manifest to Kanban format
-      const todoFiles = todoManifest.items || [];
+    let mounted = true;
+    const loadManifest = async () => {
+      try {
+        const resp = await fetch('http://localhost:3001/todo-manifest');
+        if (!resp.ok) {
+          throw new Error('Failed to fetch manifest');
+        }
+        const todoManifest = await resp.json();
+
+        // Convert TODO manifest to Kanban format
+        const todoFiles = todoManifest.items || [];
       const columns = [
         { id: 1, title: '🔴 Todo', cards: [], color: '#e74c3c' },
         { id: 2, title: '🔴 Todo#2', cards: [], color: '#e74c3c' },
@@ -50,12 +60,19 @@ const TodoKanbanBoard = () => {
         }
       });
       
-      setKanbanData({ columns });
-    } catch (error) {
-      console.error('Error loading TODO data:', error);
-    } finally {
-      setLoading(false);
-    }
+        if (mounted) setKanbanData({ columns });
+      } catch (error) {
+        console.error('Error loading TODO data:', error);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
+    loadManifest();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const handleBoardChange = (newBoard) => {
