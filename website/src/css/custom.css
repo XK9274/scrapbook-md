@@ -330,7 +330,7 @@ body:has(.heroBanner_qdFl),
 [class*="docCardListItem"]:hover {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(var(--ifm-color-primary-rgb), 0.2) !important;
 }
 
 /* Code Block Styling */

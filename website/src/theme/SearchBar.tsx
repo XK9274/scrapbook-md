@@ -11,10 +11,7 @@ export default function SearchBar() {
   const history = useHistory();
   const location = useLocation();
   const allDocsData = useAllDocsData();
-  // Colour selector UI lives in `ColourSelector` component. It handles persistence
-  // and updates CSS variables. This file only renders the search input and the
-  // selector component to the right so the navbar layout stays clean.
-
+  
   // Get all documents for search
   const searchData = useMemo(() => {
     const docs: Array<{id: string, title: string, path: string}> = [];
